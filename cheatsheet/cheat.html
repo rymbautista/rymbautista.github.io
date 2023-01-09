@@ -1,0 +1,110 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="./cheat.css" />
+    <title>Cheatsheet 🐸</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2280%22>🐸</text></svg>">
+  </head>
+  <body>
+    <h1 class="fade-in-text">HCDE 438 Cheatsheet</h1>
+    <div class="cheat-container">
+      <div>
+        <p class="intro-paragraph">
+        <h2>Hover Images</h2>
+        <h3>HTML</h3>
+        <pre> <code>
+    &lt;/div>
+    &lt;div class="imageBox">
+      &lt;a href="./bio/bio.html">
+    &lt;div class="imageInn">
+    &lt;img class="picture"
+        src="IMG_7888.png" alt="Default Image">
+    &lt;/div>
+        &lt;div class="hoverImg">
+        &lt;img class="picture"
+        src="Untitled_Artwork (3) copy.png" alt="Profile Image">
+        &lt;/div>
+        &lt;/a>
+    &lt;/div>
+        </code> </pre>
+        <h3>CSS</h3>
+        <pre> <code>
+    .imageBox {
+      position: relative;
+      float: left;
+      }
+      
+      .imageBox .hoverImg {
+      position: absolute;
+      left: 0;
+      top: 0;
+      display: none;
+      }
+      
+      .imageBox:hover .hoverImg {
+      display: block;
+      }
+        </code> </pre>
+        <h2>Fade Hover</h2>
+        <h3>HTML</h3>
+        <pre> <code>
+      &lt;div class="imageBox">
+      &lt;a href="./bio/bio.html">
+      &lt;div class="imageInn">
+      &lt;img class="picture"
+        src="/images/IMG_7888.png" alt="Default Image">
+      &lt;/div>
+      &lt;div class="hoverImg">
+        &lt;img class="picture"
+        src="/images/Untitled_Artwork (3) copy.png" alt="Profile Image">
+      &lt;/div>
+        &lt;span class="caption">About Me!</span>
+      &lt;/a>
+      &lt;/div>
+        </code> </pre>
+        <h3>CSS</h3>
+        <pre> <code>
+    .fade-in-text {
+      font-family: Lora;
+      font-size: 50px;
+      padding-top: 15px;
+      text-align: center;
+      }
+      
+      .fade-in-text:hover {
+        animation: fadeIn 5s;
+        -webkit-animation: fadeIn 5s;
+        -moz-animation: fadeIn 5s;
+        -o-animation: fadeIn 5s;
+        -ms-animation: fadeIn 5s;
+        }
+        
+        @keyframes fadeIn {
+        0% { opacity: 0; }
+        100% { opacity: 1; }
+        }
+        
+        @-moz-keyframes fadeIn {
+        0% { opacity: 0; }
+        100% { opacity: 1; }
+        }
+        
+        @-webkit-keyframes fadeIn {
+        0% { opacity: 0; }
+        100% { opacity: 1; }
+        }
+        
+        @-o-keyframes fadeIn {
+        0% { opacity: 0; }
+        100% { opacity: 1; }
+        }
+        
+        @-ms-keyframes fadeIn {
+        0% { opacity: 0; }
+        100% { opacity: 1; }
+        }
+        </code> </pre>
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

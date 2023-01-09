@@ -18,3 +18,27 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   color: white;
 }
+
+backb {
+  color: rgb(60, 75, 142);
+}
+
+.imageBox:hover .hoverImg {
+    display: block;
+}
+
+.imageBox {
+  position: relative;
+  float: left;
+}
+
+.imageBox .hoverImg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: none;
+}
+
+.imageBox:hover .hoverImg {
+  display: block;
+}
