@@ -1,0 +1,10 @@
+{
+    "manifest_version": 3,
+    "name": "Froggy Pal",
+    "description": "A Froggy Pal that will keep you company",
+    "version": "1.0",
+    "action": {
+        "default_popup": "popup.html",
+        "default_icon": "frog2.png"
+    }
+}

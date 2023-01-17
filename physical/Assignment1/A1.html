@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="./A1.css" />
+    <title>A1 Blink 💡</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2280%22>🐸</text></svg>">
+  </head>
+  <body>
+    <h1 class="fade-in-text">A1 Blink 💡</h1>
+    <div class="writeup-container">
+      <div>
+        <p class="intro-paragraph">
+          <h2>Overview</h2>
+          <b> 
+            A1: Blink was a challenge to use an Arduino to cause multiple bulbs to light up independently one at a time. 
+        <div><img class="picture"
+            src="/physical/images/Bord.png" /> 
+        <span class="caption">Image of the "Blink" Circut</span> 
+        <img class="picture"
+        src="/physical/images/Blink.gif" />
+        <span class="caption">Image of LED blinking independently from each other</span>  
+        </div>      
+          <br>
+          <h2>👨‍💻Firmware</h2> 
+          <pre> <code>
+            void setup() {           // initialize digital pin LED_BUILTIN as an output.
+                pinMode(13, OUTPUT); // initialize digital pin 13 as an output
+                pinMode(12, OUTPUT); // initialize digital pin 12 as an output
+                pinMode(11, OUTPUT); // initialize digital pin 11 as an output
+              }
+              
+            void loop() {            // loop function that runs forever
+            digitalWrite(13, HIGH);  // turns on the LED in Pin 13 the (first one)
+            delay(1000);             // wait for a second
+            digitalWrite(13, LOW);   // turns off the LED in Pin 13 the (first one)
+            digitalWrite(12, HIGH);  // turns on the LED in Pin 12 the (second one)
+            delay(1000);             // wait for a second
+            digitalWrite(12,LOW);    // turns off the LED in Pin 12 the (second one)
+            digitalWrite(11, HIGH);  // turns on the LED in Pin 11 the (third one)
+            delay(1000);             // wait for a second
+            digitalWrite(11, LOW);   // turns off the LED in Pin 11 the (third one)
+            delay(1000);             // wait for a second
+            }
+            </code> </pre>  
+            <span class="caption">Code that initializes the use of pins 11,12, and 13 on the Arduino and then loops through a cycle that sets a pin to High (on) or low (off) starting with turning on the first LED for one second and then it turns off while the second pin turns on then off while the third LED turns on for a second and then off. The pattern is then repeated.</span>
+          <br> 
+          <h2>🧮 Calculations and Schematic 📄</h2>
+          For calculations, I utilized Ohm's law (V=IR) to calculate the minimum amount of resistance to use.
+          The computer outputs 5V (V=5) and a red LED causes a drop of 1.8V. Then from the Datasheet docuent the max amount of current for a red buld should be .03MA so I used .02A to be safe. 
+          Now that I have the variables for solving for the resistance needed I solved it and found that R = 160Ω. In my circuit I 
+          decided to use 330Ω as it was higher than the minimum about of resistance needed to power the circuit. 
+              <img class="picture"
+              src="/physical/images/A1Cal.jpg" /> 
+              <span class="caption">Calculation using Ohm's Law to find Resistance</span> 
+              <img class="picture"
+              src="/physical/images/A1schematic.png" /> 
+              <span class="caption">Schematic of the Blink! Circuit</span> 
+              <a href="/physical\physical.html">
+              <span class="caption">Home 🏠</span>  
+              </a>        
+              <br> 
+          </b>
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
