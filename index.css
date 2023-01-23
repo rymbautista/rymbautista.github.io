@@ -1,5 +1,5 @@
 .picture {
-  width: 300px;
+  width: 250px;
   border: 1px solid rgb(45, 136, 56);
   border-radius: 10px;
   cursor: pointer;
@@ -7,12 +7,14 @@
   aspect-ratio: 1;
 }
 
-.picture:hover {
-  filter: brightness(80%);
-}
-
 .picture-container {
+  background-color: rgb(234, 245, 235);
+  border-radius: 10px;
+  padding-top: 10px;
+  padding-left: 30px;
+  padding-right: 30px;
   display: flex;
+  justify-content: space-around;
   flex-wrap: wrap;
   width: 80%;
   margin: auto;
@@ -21,12 +23,84 @@
 
 body {
   background-color: rgb(45, 136, 56);
-  font-family: Lora, Helvetica, sans-serif;
+  font-family: Lora;
   color: white;
+  display: flex;
+  text-align: center;
+}
+
+.fade-in-text {
+font-family: Lora;
+font-size: 50px;
+padding-top: 15px;
+}
+
+.fade-in-text:hover {
+animation: fadeIn 5s;
+-webkit-animation: fadeIn 5s;
+-moz-animation: fadeIn 5s;
+-o-animation: fadeIn 5s;
+-ms-animation: fadeIn 5s;
+}
+
+@keyframes fadeIn {
+0% { opacity: 0; }
+100% { opacity: 1; }
+}
+
+@-moz-keyframes fadeIn {
+0% { opacity: 0; }
+100% { opacity: 1; }
+}
+
+@-webkit-keyframes fadeIn {
+0% { opacity: 0; }
+100% { opacity: 1; }
+}
+
+@-o-keyframes fadeIn {
+0% { opacity: 0; }
+100% { opacity: 1; }
+}
+
+@-ms-keyframes fadeIn {
+0% { opacity: 0; }
+100% { opacity: 1; }
 }
 
 .page-container {
   width: 80%;
   margin-top: 5rem;
   margin: auto;
+}
+
+.imageBox {
+position: relative;
+float: left;
+}
+
+.imageBox .hoverImg {
+position: absolute;
+left: 0;
+top: 0;
+display: none;
+}
+
+.imageBox:hover .hoverImg {
+display: block;
+}
+
+.caption {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  font-size: 20px;
+  display: block;
+  color: black;
+}
+
+.bpic {
+position: absolute;
+right: 0px;
+bottom: 0px;
+width: 300px;
 }

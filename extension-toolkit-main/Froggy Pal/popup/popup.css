@@ -1,0 +1,38 @@
+body {
+  width: max-content;
+  margin: 0;
+  font-size: 1.5rem;
+  border-radius: 10px;
+}
+
+.popup-container {
+  width: 90%;
+  font-family:'Go Frog';
+  padding: 5px;
+  border-radius: 10px;
+  color: rgb(49, 106, 39);
+  text-align: center;
+}
+
+.popup-title {
+  font-weight: 900;
+  background-color: rgb(26, 101, 21);
+  color: white;
+  width: 100%;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.popup-content {
+  font-family: Quicksand;
+  padding: 5px;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+button {
+  width: 100%;
+  border-radius: 10px;
+  font-family:'Quicksand';
+  font-weight: 200;
+}

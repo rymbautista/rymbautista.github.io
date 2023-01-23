@@ -1,20 +1,70 @@
 .picture {
-  width: 300px;
   border-radius: 10px;
+  width: 300px;
   object-fit: cover;
   aspect-ratio: 1;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  padding-right: 1%;
+  padding-left: 1%;
 }
 
 .bio-container {
+  background-color: rgb(234, 245, 235);
+  padding-top: 1%;
+  padding-bottom;: 1%;
+  padding-right: : 1%;
+  padding-left: : 1%;
+  border-radius: 10px;
   display: flex;
   width: 80%;
   margin: auto;
-  margin-top: 5rem;
+  margin-top: 3rem;
   gap: 12px;
 }
 
 body {
-  background-color: black;
-  font-family: Arial, Helvetica, sans-serif;
-  color: white;
+  background-color: rgb(45, 136, 56);
+  font-family: Lora;
+  color: black;
 }
+
+.fade-in-text {
+  font-family: Lora;
+  font-size: 50px;
+  padding-top: 15px;
+  text-align: center;
+  }
+  
+.fade-in-text:hover {
+  animation: fadeIn 5s;
+  -webkit-animation: fadeIn 5s;
+  -moz-animation: fadeIn 5s;
+  -o-animation: fadeIn 5s;
+  -ms-animation: fadeIn 5s;
+  }
+  
+  @keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+  }
+  
+  @-moz-keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+  }
+  
+  @-webkit-keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+  }
+  
+  @-o-keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+  }
+  
+  @-ms-keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+  }

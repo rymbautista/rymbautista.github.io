@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="./writeup.css" />
+    <title>MP1 Writeup 🐸</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2280%22>🐸</text></svg>">
+  </head>
+  <body>
+    <h1 class="fade-in-text">MP1 Writeup</h1>
+    <div class="writeup-container">
+      <div>
+        <p class="intro-paragraph">
+          <h2>Overview and usage</h2>
+          <b>
+            Froggy Pal is a virtual pet that allows you to take care of feeeding you own littler frog. After installing You Fraoggy Pal,
+            you can click the froggy pal icon on the hot bar. Here a pop-up will appear prompting you to go to visit your forggy pal.
+            Here you meet Paul the default frog, but feel free to neam thme what every your new pal will be! They're also needing to be feed
+            Keep track of when they were last fed and make sure to feed them! 
+          <br>
+          <h3>To run this code:</h3> 
+          <ul>
+            <li>Download the Froggy Pal file</li>
+            <li>Go to the Chrome://extensions/</li>
+            <li>Turn on developer mode</li>
+            <li>Load Unpack the Froggy Pal File</li>
+            <li>Enjoy you new Froggy Pal!</li>
+          </ul>
+          <img class="picture"
+            src="/images/Froggy Pal.JPG" />
+            <img class="picture"
+            src="/images/A1 Gif.gif" />    
+          <br>
+          <h2>Development Process</h2> 
+          <h3>Ideation</h3> 
+            The development process started with thinking about what I would want this frog to look like. I had many ideas, but narrowed it down to
+            being able to rename, feed the frog, and also update when the frog was fed.
+          <h3>Repurposing Examples</h3> 
+            To begin I built off of the e-nator example from class, it 
+            had many elements that were similar to mine. The first thing I did redesigned the popup to match the asethetic of the webextension. 
+            I then started redesigning the configuration page. I added a a gif of a frog I drew to make it look like a living pet. Then played
+            around with how elements worked.
+          <img class="picture"
+            src="/images/A1 snap.JPG" />  
+          <h3>Renaming</h3> 
+          After recieveing help on learning how to have the html and Javascript talking I was able to get a text field which took the input of
+          the user and sent in a new name for a users froggy Pal. 
+          <h3>Feeding</h3> 
+          After that I was able to replicate and adjust the code alongside the Date() objects and its functions to allow me to take get the time
+          when a user would press the button to feed their frog and update their last fed.  
+          <h3>Asethetic Final Touches</h3> 
+          After implamenting all the main functions for Froggy Pal I went back and added new fonts like "Go Frog" and "Quicksand" then I 
+          added abd adjusted a smaller boarder that surrounded the Froggy Pal and then went back and touched up the popup.
+          <h2>Issues</h2> 
+          <h3>Learning about how Event Listener and tags worked</h3>
+            The biggest roadblock I faced was in reguards to Event Listeners and tags as I was still new to them. 
+          <h3>If/if else/else statments</h3>
+            One of the things I was tryng to deal with was setting condition to properly display the last fed time as the function I used
+            displayed hours in in military time and single digits, which doesnt work for the XX:0X format, and also to set am and pm. So I tried to use if and else statments
+            I had to go to w3 to relarn about if else for multiple conditions. But the biggest thing that I used was alerts to see if the conditions were
+            flowing the right ways. This led me to remembering about nested if else where I had a gorup of like condiitons go through anouther 
+            if/else statment to change properly display the time. 
+          <h3>Formating</h3>
+            One issue I came into was not really knowing what I was effecting when I was adjusting the css to changing the page format. Thats when 
+            I started to use inspect as a way to specifically locate what element I was changing and it also allowed me to really gain a grasp
+            on what certain element were actually effecting, like margins, padding, and borders. 
+          <br> 
+          <h2>Ideas and Future</h2> 
+            <ul>
+              <li>Have a new gif when an action like being fed was done</li>
+              <li>A random words of affirmation generator</li>
+              <li>More interactions like dressing the frog up</li>
+              <li>Begin able to drag food for it to eat</li>
+            </ul>
+          <h2>Kudos</h2> 
+            I would like to thank Raina and Hannah so much for helping me out to figure out how to work th eevent clickers and debuggin the probelms I encounted with Date() 
+          </b>
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
