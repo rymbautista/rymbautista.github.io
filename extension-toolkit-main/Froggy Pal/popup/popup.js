@@ -23,10 +23,5 @@ async function sendMessageToContentScript(message) {
 }
 
 listen("click", "#open-options", (e) =>
-  openOptionsPage("../options/options.html")
-);
-
-listen("change", "#enable", (e) =>
-  // Send a message to the content script with the current value of the checkbox
-  sendMessageToContentScript({ replace: e.target.checked })
+  openOptionsPage("../home/home.html")
 );

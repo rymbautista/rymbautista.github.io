@@ -4,7 +4,21 @@
     "description": "A Froggy Pal that will keep you company",
     "version": "1.0",
     "action": {
-        "default_popup": "popup.html",
+        "default_popup": "popup/popup.html",
         "default_icon": "frog2.png"
-    }
+    },
+    "options_page": "home/home.html",
+    "permissions": [
+        "storage"
+    ],
+    "content_scripts": [
+        {
+            "matches": [
+                "*://*/*"
+            ],
+            "js": [
+                "home/home.js"
+            ]
+        }
+    ]
 }

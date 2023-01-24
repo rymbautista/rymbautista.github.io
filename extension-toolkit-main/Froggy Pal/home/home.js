@@ -127,7 +127,7 @@ function changeTime() {
     }
   } else {
     if (hour === 12){
-      alert("12");
+      //alert("12");
       // ap = "pm";
     } else {
       ap = "am";
