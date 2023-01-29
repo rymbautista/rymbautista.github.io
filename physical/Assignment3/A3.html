@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="./A3.css" />
+    <title>A3 Input Output 💡</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2280%22>🐸</text></svg>">
+  </head>
+  <body>
+    <h1 class="fade-in-text">A3 Input Output 💡</h1>
+    <div class="writeup-container">
+      <div>
+        <p class="intro-paragraph">
+          <h2>Overview</h2>
+          <b> 
+            A2: Fade was a challenge to use an Arduino to cause multiple bulbs to fade in and out when using a button. 
+        <div><img class="picture"
+            src="/physical/images/Fade CIrcut.png" /> 
+        <span class="caption">Image of the "Fade" Circut</span> 
+        <img class="picture"
+        src="/physical/images/Fade Gif.gif" />
+        <span class="caption">Gif of 3 LEDs fading when a button is pressed and then turning off if it's not pressed.</span>  
+        </div>      
+          <br>
+          <h2>👨‍💻Firmware</h2> 
+          <pre> <code>
+            #include <Servo.h>
+
+            Servo myServo;  // create a servo object
+            
+            const int sensorPin = A0;  // pin that the sensor is attached to
+            const int spin = 9;      // pin that the LED is attached to
+            
+            int sensorValue = 0;   // the sensor value
+            int sensorMin = 1023;  // minimum sensor value
+            int sensorMax = 0;     // maximum sensor value
+            int sensorValue2 = 0;   // the sensor value
+            int sensorMin2 = 1023;  // minimum sensor value
+            int sensorMax2 = 0;     // maximum sensor value
+            
+            void setup() {
+              myServo.attach(spin); // attaches the servo on pin 9 to the servo object
+              Serial.begin(9600);
+              // turn on LED to signal the start of the calibration period:
+              pinMode(13, OUTPUT);
+              digitalWrite(13, HIGH);
+              pinMode(2, INPUT_PULLUP);
+              pinMode(6, OUTPUT);
+              pinMode(7, OUTPUT);
+              pinMode(5, OUTPUT);
+              pinMode(4, OUTPUT);
+            
+              // calibrate during the first five seconds
+              while (millis() < 5000) {
+                sensorValue = analogRead(sensorPin);
+                sensorValue2 = analogRead(A1);
+            
+                // record the maximum sensor value
+                if (sensorValue > sensorMax) {
+                  sensorMax = sensorValue;
+                }
+            
+                // record the minimum sensor value
+                if (sensorValue < sensorMin) {
+                  sensorMin = sensorValue;
+                }
+                if (sensorValue2 > sensorMax2) {
+                  sensorMax2 = sensorValue2;
+                }
+            
+                // record the minimum sensor value
+                if (sensorValue2 < sensorMin2) {
+                  sensorMin2 = sensorValue2;
+                }
+              }
+            
+              // signal the end of the calibration period
+              digitalWrite(13, LOW);
+            }
+            
+            void loop() {
+              sensorValue = analogRead(sensorPin);
+              sensorValue2 = analogRead(A1);
+              
+              sensorValue = constrain(sensorValue, sensorMin, sensorMax); // in case the sensor value is outside the range seen during calibration
+            
+              // apply the calibration to the sensor reading
+              sensorValue = map(sensorValue, sensorMin, sensorMax, 0, 180);
+              sensorValue2 = map(sensorValue2, sensorMin2, sensorMax2, 0, 180);
+              Serial.println(sensorValue);                  // set the servo position
+              myServo.write(sensorValue); //some angle between 0 and 180
+              //delay(2000);
+              int sensorVal = digitalRead(2);
+            
+              //print out the value of the pushbutton
+            
+              Serial.println(sensorVal);
+              Serial.println(sensorValue2);
+              delay(100);
+            
+              if (sensorVal == HIGH) {              
+                digitalWrite(13, LOW);              
+              } else {              
+                digitalWrite(13, HIGH);
+                myServo.write(180);
+                delay(2000);              
+              }
+              if (sensorValue < 92) {              
+                digitalWrite(7, HIGH);              
+              } else {              
+                digitalWrite(7, LOW);              
+              }
+              if (sensorValue > 92) {              
+                digitalWrite(6, HIGH);              
+              } else {              
+                digitalWrite(6, LOW);              
+              }
+              if (sensorValue2 < 89) {              
+                digitalWrite(5, HIGH);              
+              } else {} 
+                digitalWrite(5, LOW);              
+              }
+              if (sensorValue2 > 89) {
+                digitalWrite(4, HIGH);
+              } else {
+                digitalWrite(4, LOW);
+              }
+            }
+            </code> </pre>  
+            <span class="caption">Code that initializes the use of pins 9, 10, and 11 as outputs and 2 as input on the Arduino and 
+              then loops through a cycle that takes a reading from pin 2 to see if the button was being pressed. 
+              If pressed the 9, 10, and 11 pins are turned on and through each look, the brightness goes up until it hits max 
+              brightness then down to max darkness causing a fade effect. If the button is not pressed the pins are turned off.</span>
+          <br> 
+          <h2>🧮 Calculations and Schematic 📄</h2>
+          For calculations for the LEDs, I utilized Ohm's law (V=IR) to calculate the minimum amount of resistance to use. 
+          The computer outputs 5V (V=5) and a red and green LED causes a drop of 1.8V. Then from the Datasheet document, the max 
+          amount of current for a red bulb should be .03MA so I used .02A to be safe. Now that I have the variables for solving 
+          for the resistance needed I solved it and found that R = 160Ω. In my circuit, I decided to use 330Ω as it was higher than 
+          the minimum about of resistance needed to power the circuit.
+          <br>
+          For the button, a 10k Resister was used in my circuit. I decided to use 10K Ω we dont want to draw too much current when the 
+          switch is closed. The higher the reistor the less curent it will draw.
+              <img class="picture"
+              src="/physical/images/Fade Calc1.jpg" /> 
+              <span class="caption">Calculation using Ohm's Law to find Resistance for the LED</span> 
+              <img class="picture"
+              src="/physical/images/Fade Circuit1.jpg" /> 
+              <span class="caption">Schematic of the Fade Circuit</span> 
+              <a href="/physical\physical.html">
+              <span class="caption">Home 🏠</span>  
+              </a>        
+              <br> 
+          </b>
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
