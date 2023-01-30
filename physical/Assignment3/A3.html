@@ -2,150 +2,157 @@
 <html>
   <head>
     <link rel="stylesheet" href="./A3.css" />
-    <title>A3 Input Output 💡</title>
+    <title>A3 Input Output! 💡</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2280%22>🐸</text></svg>">
   </head>
   <body>
-    <h1 class="fade-in-text">A3 Input Output 💡</h1>
+    <h1 class="fade-in-text">A3: Input Output! 💡</h1>
     <div class="writeup-container">
       <div>
         <p class="intro-paragraph">
           <h2>Overview</h2>
           <b> 
-            A2: Fade was a challenge to use an Arduino to cause multiple bulbs to fade in and out when using a button. 
+            A3: Input Output was a challenge to use a sensor (Joystick) in a voltage divider to change the state of an output device. 
         <div><img class="picture"
-            src="/physical/images/Fade CIrcut.png" /> 
-        <span class="caption">Image of the "Fade" Circut</span> 
+            src="/physical/images/A3Pic.png" /> 
+        <span class="caption">Image of the "Input Output!" Circut</span> 
         <img class="picture"
-        src="/physical/images/Fade Gif.gif" />
-        <span class="caption">Gif of 3 LEDs fading when a button is pressed and then turning off if it's not pressed.</span>  
+        src="/physical/images/A3Gif.gif" />
+        <span class="caption">Gif of a joystick controlling a Servo Mortor when moved in the,4 LEDs when moved, and another when clicked.</span>  
         </div>      
           <br>
           <h2>👨‍💻Firmware</h2> 
           <pre> <code>
-            #include <Servo.h>
+        #include <Servo.h> //Brings in the Servo Libary *
 
-            Servo myServo;  // create a servo object
-            
-            const int sensorPin = A0;  // pin that the sensor is attached to
-            const int spin = 9;      // pin that the LED is attached to
-            
-            int sensorValue = 0;   // the sensor value
-            int sensorMin = 1023;  // minimum sensor value
-            int sensorMax = 0;     // maximum sensor value
-            int sensorValue2 = 0;   // the sensor value
-            int sensorMin2 = 1023;  // minimum sensor value
-            int sensorMax2 = 0;     // maximum sensor value
-            
-            void setup() {
-              myServo.attach(spin); // attaches the servo on pin 9 to the servo object
-              Serial.begin(9600);
-              // turn on LED to signal the start of the calibration period:
-              pinMode(13, OUTPUT);
-              digitalWrite(13, HIGH);
-              pinMode(2, INPUT_PULLUP);
-              pinMode(6, OUTPUT);
-              pinMode(7, OUTPUT);
-              pinMode(5, OUTPUT);
-              pinMode(4, OUTPUT);
-            
-              // calibrate during the first five seconds
-              while (millis() < 5000) {
-                sensorValue = analogRead(sensorPin);
-                sensorValue2 = analogRead(A1);
-            
-                // record the maximum sensor value
-                if (sensorValue > sensorMax) {
-                  sensorMax = sensorValue;
-                }
-            
-                // record the minimum sensor value
-                if (sensorValue < sensorMin) {
-                  sensorMin = sensorValue;
-                }
-                if (sensorValue2 > sensorMax2) {
-                  sensorMax2 = sensorValue2;
-                }
-            
-                // record the minimum sensor value
-                if (sensorValue2 < sensorMin2) {
-                  sensorMin2 = sensorValue2;
-                }
-              }
-            
-              // signal the end of the calibration period
-              digitalWrite(13, LOW);
+        Servo myServo;  // create a servo object *
+        
+        const int sensorPin = A0;  // pin that the sensor is attached to *
+        const int spin = 9;        // pin that the LED is attached to *
+        
+        int sensorValue = 0;    // the joystick value in the x direction *
+        int sensorMin = 1023;   // minimum joystick value in the x direction *
+        int sensorMax = 0;      // maximum joystick value in the x direction *
+        int sensorValue2 = 0;   // the joystick value in the y direction *
+        int sensorMin2 = 1023;  // minimum joystick value in the y direction *
+        int sensorMax2 = 0;     // maximum joystick value in the y direction *
+        
+        void setup() {
+          myServo.attach(spin);         //Attaches the servo on pin 9 to the servo object **
+          Serial.begin(9600);           //Sets the data rate in bits per second for serial data transmission
+          pinMode(13, OUTPUT);          //Initialize digital pin 13 as an output   
+          pinMode(2, INPUT_PULLUP);     //Initialize digital pin 2 as an Input Pulllup Pin ***
+          pinMode(6, OUTPUT);           //Initialize digital pin 6 as an output
+          pinMode(7, OUTPUT);           //Initialize digital pin 7 as an output
+          pinMode(5, OUTPUT);           //Initialize digital pin 5 as an output
+          pinMode(4, OUTPUT);           //Initialize digital pin 4 as an output
+
+          digitalWrite(13, HIGH); // turn on LED to signal the start of the calibration period *
+        
+          while (millis() < 5000) {                 // calibrate during the first five seconds *
+            sensorValue = analogRead(sensorPin);    //Creates the Variable for the values read when moving the joystick in the x direction *
+            sensorValue2 = analogRead(A1);          //Creates the Variable for the values read when moving the joystick in the y direction *
+        
+            // This section record the new max and min sensor values
+
+            if (sensorValue > sensorMax) {          //Detects if the current read value is larger than the current Max *
+              sensorMax = sensorValue;              //Sets the new Max X direction Value *
             }
-            
-            void loop() {
-              sensorValue = analogRead(sensorPin);
-              sensorValue2 = analogRead(A1);
-              
-              sensorValue = constrain(sensorValue, sensorMin, sensorMax); // in case the sensor value is outside the range seen during calibration
-            
-              // apply the calibration to the sensor reading
-              sensorValue = map(sensorValue, sensorMin, sensorMax, 0, 180);
-              sensorValue2 = map(sensorValue2, sensorMin2, sensorMax2, 0, 180);
-              Serial.println(sensorValue);                  // set the servo position
-              myServo.write(sensorValue); //some angle between 0 and 180
-              //delay(2000);
-              int sensorVal = digitalRead(2);
-            
-              //print out the value of the pushbutton
-            
-              Serial.println(sensorVal);
-              Serial.println(sensorValue2);
-              delay(100);
-            
-              if (sensorVal == HIGH) {              
-                digitalWrite(13, LOW);              
-              } else {              
-                digitalWrite(13, HIGH);
-                myServo.write(180);
-                delay(2000);              
-              }
-              if (sensorValue < 92) {              
-                digitalWrite(7, HIGH);              
-              } else {              
-                digitalWrite(7, LOW);              
-              }
-              if (sensorValue > 92) {              
-                digitalWrite(6, HIGH);              
-              } else {              
-                digitalWrite(6, LOW);              
-              }
-              if (sensorValue2 < 89) {              
-                digitalWrite(5, HIGH);              
-              } else {} 
-                digitalWrite(5, LOW);              
-              }
-              if (sensorValue2 > 89) {
-                digitalWrite(4, HIGH);
-              } else {
-                digitalWrite(4, LOW);
-              }
+        
+            if (sensorValue < sensorMin) {          //Detects if the current read value is smaller than the current Min *
+              sensorMin = sensorValue;              //Sets the new Min X direction Value *
             }
+            if (sensorValue2 > sensorMax2) {        //Detects if the current read value is larger than the current Max 
+              sensorMax2 = sensorValue2;            //Sets the new Max Y direction Value 
+            }
+        
+            if (sensorValue2 < sensorMin2) {        //Detects if the current read value is smaller than the current Min 
+              sensorMin2 = sensorValue2;            //Sets the new Min Y direction Value 
+            }
+          }
+          digitalWrite(13, LOW); // signal the end of the calibration period
+        }
+        
+        void loop() {                            //The loop routine runs over and over again forever:
+          sensorValue = analogRead(sensorPin);   //Variable for reading the value in the x direction *
+          sensorValue2 = analogRead(A1);         //Variable for reading the value in the y direction *
+          int sensorVal = digitalRead(2);        //Variable for reading if the button has been pressed
+          
+          sensorValue = constrain(sensorValue, sensorMin, sensorMax); // in case the sensor value is outside the range seen during calibration *
+          sensorValue2 = constrain(sensorValue2, sensorMin2, sensorMax2); // in case the sensor value is outside the range seen during calibration *
+        
+          sensorValue = map(sensorValue, sensorMin, sensorMax, 0, 180);     //apply the calibration to the sensor reading *
+          sensorValue2 = map(sensorValue2, sensorMin2, sensorMax2, 0, 180); //apply the calibration to the sensor reading *
+          myServo.write(sensorValue);                                       //set the servo position some angle between 0 and 180 when the joy 
+                                                                            //stick is moved in the x direction **
+          
+
+          Serial.println(sensorVal);      //Print HIGH or LOW if the Button has been pressed
+          Serial.println(sensorValue);    //Prints the values of the joystick moving in the x direction
+          Serial.println(sensorValue2);   //Prints the values of the joystick moving in the y direction
+          delay(100);                     //Wait for 100 Milliseconds
+
+          if (sensorVal == HIGH) {   //Indicated if the button has been clicked ***       
+            digitalWrite(13, LOW);   //Turns the LED off when the button is not clicked ***     
+          } else {              
+            digitalWrite(13, HIGH);  //Turns on the LED when the button is clicked ***
+            myServo.write(180);      //Sets the Servo to 180 degrees
+            delay(2000);             //Wait 2 seconds 
+          }
+
+          //This section is for making corresponding lights turn on when the joystick is moved from neutral
+
+          if (sensorValue < 92) {    //Detects if the Joystick has moved down in the x direction         
+            digitalWrite(7, HIGH);   //Turns the Blue LED on           
+          } else {              
+            digitalWrite(7, LOW);    //Turns the Blue LED off          
+          }
+          if (sensorValue > 92) {    //Detects if the Joystick has moved up in the x direction        
+            digitalWrite(6, HIGH);   //Turns the Green LED on           
+          } else {              
+            digitalWrite(6, LOW);    //Turns the Green LED off          
+          }
+          if (sensorValue2 < 89) {   //Detects if the Joystick has moved down in the y direction            
+            digitalWrite(5, HIGH);   //Turns the Red LED on           
+          } else {} 
+            digitalWrite(5, LOW);    //Turns the Red LED off          
+          }
+          if (sensorValue2 > 89) {   //Detects if the Joystick has moved up in the y direction 
+            digitalWrite(4, HIGH);   //Turns the Yellow LED on
+          } else {
+            digitalWrite(4, LOW);    //Turns the Yellow LED off
+          }
+        }
+        
+        Some code was adapted from the calibration example(*), the Servo Code Slide(**), and the PullUp Pin example (***) 
+        indicated by asterisk in the comments 
+
             </code> </pre>  
-            <span class="caption">Code that initializes the use of pins 9, 10, and 11 as outputs and 2 as input on the Arduino and 
-              then loops through a cycle that takes a reading from pin 2 to see if the button was being pressed. 
-              If pressed the 9, 10, and 11 pins are turned on and through each look, the brightness goes up until it hits max 
-              brightness then down to max darkness causing a fade effect. If the button is not pressed the pins are turned off.</span>
+            <span class="caption">Code that initializes the use of pins 13,7,6,5, and 4 as outputs, 9 as a to the servo object 2 as an input pullup. 
+              This code first does a calibration to find the max and min values of the joystick moving in the x and y ranges of the joystick. Then it 
+              constrains and maps these values to the range of 0 to 180 to fit with the values the servo takes in. This code causes a light to turn on 
+              and the servo to move to 180 degrees when the switch button is pressed. Then when the joystick is moved in the x direction the servo will 
+              move and then a blue or green light will turn on when it is moved down or up away from neutral respectively. Then a red or yellow light 
+              will move and turn on similarly but with respect to when the joystick is moved in the y direction.
+            </span>
           <br> 
           <h2>🧮 Calculations and Schematic 📄</h2>
-          For calculations for the LEDs, I utilized Ohm's law (V=IR) to calculate the minimum amount of resistance to use. 
-          The computer outputs 5V (V=5) and a red and green LED causes a drop of 1.8V. Then from the Datasheet document, the max 
-          amount of current for a red bulb should be .03MA so I used .02A to be safe. Now that I have the variables for solving 
-          for the resistance needed I solved it and found that R = 160Ω. In my circuit, I decided to use 330Ω as it was higher than 
-          the minimum about of resistance needed to power the circuit.
+          For calculations for the LEDs, I utilized Ohm's law (V=IR) to calculate the minimum amount of resistance to use. The computer outputs 5V (V=5)
+           and a red, yellow, and green LED causes a drop of 1.8V and a blue with 3.3V. Then from the Datasheet document, the max amount of current 
+           for the LEDs should be .03MA so I used .02A to be safe. Now that I have the variables for solving for the resistance needed I solved it 
+           and found that R = 160Ω for red, yellow, and green while blue was R = 85Ω. In my circuit, I decided to use 330Ω as it was higher than the 
+           minimum about of resistance needed to power the circuit.
           <br>
-          For the button, a 10k Resister was used in my circuit. I decided to use 10K Ω we dont want to draw too much current when the 
-          switch is closed. The higher the reistor the less curent it will draw.
+          For the joystick, I would normally use, a 10k Resister in my circuit. As a 10K Ω wouldn't draw too much current when the switch is open.
+           The higher the resistor the less current it will draw. But for the joystick, I used the Arduino Digital PullUp Pin feature where arduino 
+           pin 2 can act as the Pullup resister and pin reader. I found that that joystick required a pullup resister instead of a pull-down by using 
+           the potentiometer to see that the current flow stopped when the button was pressed. 
               <img class="picture"
-              src="/physical/images/Fade Calc1.jpg" /> 
-              <span class="caption">Calculation using Ohm's Law to find Resistance for the LED</span> 
+              src="/physical/images/A3Calc.png" /> 
+              <span class="caption">Calculation using Ohm's Law to find Resistance for the LEDs</span> 
               <img class="picture"
-              src="/physical/images/Fade Circuit1.jpg" /> 
-              <span class="caption">Schematic of the Fade Circuit</span> 
+              src="/physical/images/A3Diagram.png" /> 
+              <span class="caption">Schematic of the Input Output! Circuit</span> 
               <a href="/physical\physical.html">
               <span class="caption">Home 🏠</span>  
               </a>        
