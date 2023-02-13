@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="./A4.css" />
+    <title>A4 Libraries! 📚</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2280%22>🐸</text></svg>">
+  </head>
+  <body>
+    <h1 class="fade-in-text">A4: Libraries! 📚</h1>
+    <div class="writeup-container">
+      <div>
+        <p class="intro-paragraph">
+          <h2>Overview</h2>
+          <b> 
+            A4: Libraries was to utilize two libraries to gain access to code that allows us to work with new components easier!
+        <div><img class="picture"
+            src="/physical/images/A4P1.png" /> 
+        <div><img class="picture"
+          src="/physical/images/A4P2.png" /> 
+        <span class="caption">Images of the "Libraries!" Circut</span> 
+        <img class="picture"
+        src="/physical/images/A4gif.gif" />
+        <span class="caption">Gif of a remote that is received by an inferred sensor causes the 7-segment display to change and 
+          the serial monitor to display certain messages of my choosing in addition to displaying the values to a button that 
+          haven't been set yet for use.</span>  
+        </div>      
+          <br>
+          <h2>👨‍💻Firmware</h2> 
+          <pre> <code>
+            #include &lt;IRremote.h>            //Brings in the Inferred Remote Libary *    
+            #include &lt;SevenSegmentDisplay.h> //Brings in the 7 segment display Libary **
+            
+            #define IR_RECEIVE_PIN 3  //sets which pin will receive the IR readings *
+            SevenSegmentDisplay screenName(11, 10, 7, 8, 9, 12, 13, 6, false); //sets which pins corresponds to which part of the segment display **
+            
+            //This section create variables of buttons and their readings *
+            #define IR_BUTTON_1 12
+            #define IR_BUTTON_2 24
+            #define IR_BUTTON_3 94
+            #define IR_BUTTON_4 8
+            #define IR_BUTTON_PLAY_PAUSE 64
+            #define IR_BUTTON_POWER 69
+            
+            void setup() {
+              Serial.begin(9600);               //Sets the data rate in bits per second for serial data transmission
+              IrReceiver.begin(IR_RECEIVE_PIN); //Initiates the IR Receive Pin *
+            }
+            
+            void loop() {
+              if (IrReceiver.decode()) {              //Checks if anything has been revieved *
+                IrReceiver.resume();                  //Resume checking for reading *
+                int command = IrReceiver.decodedIRData.command; //Get the recently recieved reading from the remote *
+                switch (command) {                    //Checks what number is recieved *
+                  case IR_BUTTON_1: {                 //Checks if buttons 1 = 12  is being pressed *
+                    Serial.println("Slay");           //Prints "Slay"
+                    screenName.displayCharacter('1'); //Sets the seven segment display to display the number 1 **
+                    break;                            //Exits the switch statement  *
+                  }
+                  case IR_BUTTON_2: {
+                    Serial.println("Yasss");
+                    screenName.displayCharacter('2');
+                    break;
+                  }
+                  case IR_BUTTON_3: {
+                    Serial.println("I &lt;3 HCDE 439");
+                    screenName.displayCharacter('3');
+                    break;
+                  }
+                  case IR_BUTTON_4: {
+                    Serial.println("Can I get a McPick 2?");
+                    screenName.displayCharacter('4');
+                    break;
+                  }
+                  case IR_BUTTON_PLAY_PAUSE: {
+                    Serial.println("Bring the Beet in");
+                    screenName.displayCharacter('B');
+                    break;
+                  }
+                  case IR_BUTTON_POWER: {
+                    Serial.println("fORGGG");
+                    screenName.displayCharacter('F');
+                    break;
+                  }
+                  default: {                              //If none of the calibrated buttons are pressed go into here *
+                    Serial.println("Who Dis???");         //Print "Who Dis???"
+                    screenName.displayCharacter('S');     //Display on teh seven segments "S" **
+                    Serial.println(IrReceiver.decodedIRData.command); //Display the Reading for future calibrations
+                  }
+                  }
+                }
+              }
+        
+        Some code was adapted from the <a href="https://github.com/alikabeel/Letters-and-Numbers-Seven-Segment-Display-Library">Seven Segment Libary Documentation</a>(*) and 
+        the <a href="https://roboticsbackend.com/arduino-ir-remote-controller-tutorial-setup-and-map-buttons/">IR Remote Libary Documentation</a>(**) indicated by asterisk in the comments 
+
+            </code> </pre>  
+            <span class="caption">Code that utilizes an IR Remote and Seven Segments Display library. It sets the use of pins 13,12,11,10,9.8.7, and 6, 
+              as seven-segment display components and initiates 3 as the IR reading pin. This code then sets variables to readings to calibrate the 
+              buttons to responses. After starting the serial monitor it begins to wait for a response from the IR Remote then when it does it checks
+              if it is one of the calibrated buttons. If it is one of them it displays a response in the serial monitor and one on the seven-segment
+              display. If it isn't one of the calibrates it does the same thing but also displays the reading for future calibrations and responses for the
+              user to use. 
+            </span>
+          <br> 
+          <h2>🧮 Calculations and Schematic 📄</h2>
+          For calculations for the red LEDs in the seven-segment display, I utilized Ohm's law (V=IR) to calculate the minimum amount of resistance to use. The computer outputs 5V (V=5)
+           and a red LED causes a drop of 1.8V Then from the Datasheet document, the max amount of current for the LEDs should be .03MA so I used .02A to be safe. Now that I have the variables for solving for the resistance needed I solved it 
+           and found that R = 160Ω for red. In my circuit, I decided to use 330Ω for each segment as it was higher than the minimum about of resistance needed to power the circuit.
+          <br>
+              <img class="picture"
+              src="/physical/images/A4Cal.png" /> 
+              <span class="caption">Calculation using Ohm's Law to find Resistance for the Red LEDs in the seven-segment display</span> 
+              <img class="picture"
+              src="/physical/images/A4Cir.png" /> 
+              <span class="caption">Schematic of the Libraries! Circuit</span> 
+              <a href="/physical\physical.html">
+              <span class="caption">Home 🏠</span>  
+              </a>        
+              <br> 
+          </b>
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
