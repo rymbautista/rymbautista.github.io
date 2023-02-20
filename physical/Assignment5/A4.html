@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="./A5.css" />
+    <title>A5 High(er) Voltage and Transistors! ⚡</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2280%22>🐸</text></svg>">
+  </head>
+  <body>
+    <h1 class="fade-in-text">A5 High(er) Voltage and Transistors! ⚡</h1>
+    <div class="writeup-container">
+      <div>
+        <p class="intro-paragraph">
+          <h2>Overview</h2>
+          <b> 
+            A5 High(er) Voltage and Transistors! was to utilize a transistor to utilize a load with a higher power source than we have worked with before.
+        <div><img class="picture"
+            src="/physical/images/A5p1.png" /> 
+        <div><img class="picture"
+          src="/physical/images/A5P.png" /> 
+        <span class="caption">Images of the "High(er) Voltage and Transistors!"</span> 
+        <img class="picture"
+        src="/physical/images/A5G.gif" />
+        <span class="caption">Gif of a circuit that utilizes capacitive touch so that when the user touches the wire, the LED strip will turn on. It will glow brighter 
+          the tighter the user touches the wire tip.
+        </span>  
+        </div>      
+          <br>
+          <h2>👨‍💻Firmware</h2> 
+          <pre> <code>
+            #include &lt;CapacitiveSensor.h>
+
+              CapacitiveSensor   cs_4_2 = CapacitiveSensor(4,2);    	// 1 megohm resistor between pins 4 & 2, pin 2 is sensor pin, 
+                                                                          add wire, metal thing (*) 
+              
+              void setup() {
+                 cs_4_2.set_CS_AutocaL_Millis(0xFFFFFFFF); 	// turn off autocalibrate on channel 1 - just as an example(*) 
+                 Serial.begin(9600);                      //Sets the data rate in bits per second for serial data transmission(*) 
+                 pinMode(6, OUTPUT);                      //Initilizes Pin 6 as an output
+              }
+              
+              void loop()               	 
+              {
+                long start = millis();        //Keeps track of time(*) 
+                long total1 =  cs_4_2.capacitiveSensor(30);     //Runs this code while the arduino is powerd and loops through(*) 
+                total1 = constrain(total1, 0, 3000);     //Constrains the values of the capactivie touch from 0 to 3000
+                total1 = map(total1, 0, 3000, 0, 255);   //Maps the values of the capactivie touch of 0 to 3000 to a 
+                                                            corresponding scale from 0 to 255
+                Serial.print(millis() - start);    	// check on performance in milliseconds(*) 
+                Serial.print("\t");                	// tab character for debug window spacing(*) 
+              
+                Serial.println(total1);            	// print sensor output 1(*) 
+                delay(20);                         	// arbitrary delay to limit data to serial port(*) 
+                analogWrite(6,total1);              // Write to pin 6 the reading from the capacitive touch
+              }
+        
+        Some code was adapted from the <a href="https://docs.google.com/presentation/d/1aAMFgXm5N2HypPeqKlxVltI8ZedkZ-D7iix1DFV73z0/edit#slide=id.g4fcc6364fc_0_294">Capacitive touch example</a>(*) indicated by asterisk in the comments 
+
+            </code> </pre>  
+            <span class="caption">Code that utilizes capacitive touch to turn on an LED strip with the use of a transistor. 
+              It sets the use of pin 2 as a sensor pin for capacitive touch and then Pin 6 as an output and starts the serial 
+              monitor. Then it starts a timer to track time for debugging, then tota1 is used to store the reading from the 
+              capacitive touch then we constrain the readings and then map them from 0 to 255 for an appropriate range for 
+              analogWrite(). for debugging the totals are printed and then written to pin 6 for the transistor to limit the 
+              power that goes through the transistor and power the LED strip.
+              
+            </span>
+          <br> 
+          <h2>🧮 Calculations and Schematic 📄</h2>
+          For calculations for white LEDs on the strip they are bundled in groups of 3 White LEDS in series. Each white LED
+           has a voltage drop of 3.3v so 3.3v*3=9.9v drop for one branch. and the resistors are marked 181 so 18*10=180Ω. 
+           So with our power supply being 12v we can solve 12v-9.9v=I*180Ω, I = 0.011667A or 11.667mA (which is within the 
+           range for the transistor) and we know it can power the LED strips safely as the power supply has a current of 
+           2A so dividing that by the 0.011667A we can power about 175 branches or when multiplied by 3, about 514 LEDs. For 
+           my left capacitive touch circuit, I utilized a 1MΩ resistor because it is a good baseline that the library is calibrated to.
+          <br>
+              <img class="picture"
+              src="/physical/images/A5Cal.png" /> 
+              <span class="caption">Calculation using Ohm's Law to find the current for one branch of 3 white LEDs of an LED strip 
+                and then using that and the current from the power supply to determine how branches/LEDs can be powered.
+              </span> 
+              <img class="picture"
+              src="/physical/images/A5Cir.png" /> 
+              <span class="caption">Schematic of the High(er) Voltage and Transistors!! Circuit</span> 
+              <a href="/physical\physical.html">
+              <span class="caption">Home 🏠</span>  
+              </a>        
+              <br> 
+          </b>
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
