@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="./writeup.css" />
+    <title>MP3 Writeup 🐸</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2280%22>🐸</text></svg>">
+  </head>
+  <body>
+    <h1 class="fade-in-text">🍏 MP3 Writeup 🍎</h1>
+    <div class="writeup-container">
+      <div>
+        <p class="intro-paragraph">
+          <h2>Overview and usage</h2>
+          <b>
+            This is a game called Frapple that utilizes p5 and p5.play to create a game about a frog that catches apples falling from the sky.
+          <br>
+          <h3>Play <a href="https://rymbautista.github.io/MP3/">Frapple!</a></h3> 
+          <img class="picture"
+            src="/images/Gamefinal.JPG" />
+          <img class="picture"
+            src="/images/gameg.gif" />    
+          <br>
+          <h2>Development Process</h2> 
+          <h3>Ideation</h3> 
+          The development process started actually with a build of frogger that I found online. Although this had a great foundation for a game, I found that
+          I was built weirdly that it was very hard coded to the dimensions that it originally had, so I pivoted to a game where apples fall from the sky and 
+          the player controls the frog with their mouse to catch these apples. 
+          <h3>The Sprites</h3>
+          The first thing I played with was creating sprites. I made the frog sprite first having it only move with the mouse and only left and right. Then I started to play with the falling objects. After getting one
+          fall from the middle of the screen I was able to get them to randomly spawn from one of the set spawn points with different velocities.
+          <img class="picture"
+            src="/images/Game1.JPG" />
+          <h3>Having them interact</h3> 
+          After constructing the sprites I used overlap to check if they would intersect and if it did the player's score would go up, and then had it so that if the objects
+          fell lower than the floor the player would lose a life. If they lost 3 the game was over.
+          <h3>Restart</h3>
+          The last function that I added was making the 'R' key on the keyboard restart the game for a game over if the user wanted to just restart. This 
+          led to me using an if statement for checking if the 'R' key has been pressed and then resetting the values to their default and clearing the array
+          of apple objects that were currently falling. 
+          <h3>Making it look Pretty</h3> 
+          One of the last steps after implementing all the functional components of my game was making the game look more pretty. I created images of frogs and apples 
+          for the catcher and object sprites. I then started by adding background elements like the floor and a bar at the top, then I added an image of the hills in the back to fill the sky. Lastly, I added a box around the game over screen
+          for readability.
+          <h2>Issues</h2> 
+          <h3>Deploying to git hub pages</h3>
+          The biggest roadblock I faced was getting over the hurdle of deploying to git hub pages. This was mainly to small things in my code and missing files 
+          when doing the rollup. I was able to successfully deploy it after being pointed to some discord posts and some spot-checking of my code from Hannah. 
+          <h3>Getting the hang of p5.play</h3>
+          One of the things I did struggle a tiny bit with was just learning how p5.play works and getting it to interact with p5 it just took me a bit of time to see
+          how it can interact. I found that the references on the website were really helpful for learning about how these libraries work.
+          <br> 
+          <h2>Ideas and Future</h2> 
+            <ul>
+              <li>A bit more cleaned-up graphics</li>
+              <li>Add animations to the apples falling and the frog moving</li>
+              <li>Implement Sounds for then the player collects an apple and loses</li>
+            </ul>
+          <h2>Kudos</h2> 
+          I would like to thank Han for helping me think about how to go about making some of my game, then I would also like to thank Max and Hwa Jung for helping me with the initial set up of my game.
+          </b>
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
