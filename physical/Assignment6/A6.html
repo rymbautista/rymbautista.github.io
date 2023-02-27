@@ -19,7 +19,7 @@
         <span class="caption">Image of the "A6 Talking to the Web!" circuit</span> 
         <img class="picture"
         src="/physical/images/A6gif.gif" />
-        <span class="caption">Gif of a circuit that takes input from a joystick to move around a circle on the computer. Then from the computer when the space bar is pressed
+        <span class="caption">Gif of a circuit that takes input from a joystick to move around a circle on the computer. Then from the computer when the mouse is pressed
           the red LED is turned on.
         </span>  
         </div>      
@@ -29,132 +29,127 @@
           <pre> <code>
             void setup() {
               // put your setup code here, to run once:
-              Serial.begin(9600);
+              Serial.begin(9600);   //Sets the data rate in bits per second for serial data transmission(*) 
               Serial.setTimeout(10); // set the timeout for parseInt
-             pinMode(5, OUTPUT);
+              pinMode(5, OUTPUT); //Set pin 5 to OUTPUT
             }
             
             void loop() {
               // put your main code here, to run repeatedly:
               int s1 = analogRead(A0);
               int s2 = analogRead(A1);
-              Serial.print("[");
+              Serial.print("[");          //Code for debugging
               Serial.print(s1);
               Serial.print(",");
               Serial.print(s2);
               Serial.println("]");
-              delay(50);
+              delay(50);                  //Wait 50 miliseconds
               if (Serial.available() > 0) {   // if there's serial data 
                 int inByte = Serial.read(); // read it
-                Serial.write(inByte);  	// send it back out as raw binary data
-                if (inByte == 32) {     // detects if the space bar was pressed
-                  analogWrite(5, 150);  // Sets the led to a light level of 150
-                } else if (inByte == 48) {  //detectes if the '0' key was pressed 
-                  analogWrite(5, 0);      //Set the light level to 0
-                } else {                // Detects if any key is pressed
-                  analogWrite(5, 50);	// sets the light level to 50
-                }
+                Serial.write(inByte);  	  // send it back out as raw binary data
+                analogWrite(5, inByte);   //Takes in the binary data and sets the light level
               }
-            }
-        
-        Some code was adapted from the <a href="https://docs.google.com/presentation/d/1aAMFgXm5N2HypPeqKlxVltI8ZedkZ-D7iix1DFV73z0/edit#slide=id.g4fcc6364fc_0_294">Capacitive touch example</a>(*) indicated by asterisk in the comments 
+            }  
 
           </code> </pre> 
           <h3>Javascript</h3> 
           <pre> <code>
-            var serial; // variable to hold an instance of the serialport library
-            var portName = 'COM3'; //rename to the name of your port
-            var dataarray = []; //some data coming in over serial!
+            var serial; // variable to hold an instance of the serialport library*
+            var portName = 'COM3'; //rename to the name of your port*
+            var dataarray = []; //some data coming in over serial!*
+            var xPos = 0;*
 
 
             function setup() {
-              serial = new p5.SerialPort();       // make a new instance of the serialport library
-              serial.on('list', printList);       // set a callback function for the serialport list event
-              serial.on('connected', serverConnected); // callback for connecting to the server
-              serial.on('open', portOpen);        // callback for the port opening
-              serial.on('data', serialEvent);     // callback for when new data arrives
-              serial.on('error', serialError);    // callback for errors
-              serial.on('close', portClose);      // callback for the port closing
+              serial = new p5.SerialPort();       // make a new instance of the serialport library*
+              serial.on('list', printList);       // set a callback function for the serialport list event*
+              serial.on('connected', serverConnected); // callback for connecting to the server*
+              serial.on('open', portOpen);        // callback for the port opening*
+              serial.on('data', serialEvent);     // callback for when new data arrives*
+              serial.on('error', serialError);    // callback for errors*
+              serial.on('close', portClose);      // callback for the port closing*
             
-              serial.list();                      // list the serial ports
-              serial.open(portName);              // open a serial port
-              createCanvas(windowWidth, windowHeight);
-              background(0x08, 0x16, 0x40);
+              serial.list();                      // list the serial ports*
+              serial.open(portName);              // open a serial port*
+              createCanvas(windowWidth, windowHeight); //Sets the canvas to be the size of the screen
+              background(0x08, 0x16, 0x40);   //*
             }
             
-            // get the list of ports:
-            function printList(portList) {
-            // portList is an array of serial port names
-            for (var i = 0; i < portList.length; i++) {
-            // Display the list the console:
-              print(i + " " + portList[i]);
+            function printList(portList) {              // get the list of ports:*
+            for (var i = 0; i &lt; portList.length; i++) { // portList is an array of serial port names*
+            print(i + " " + portList[i]);        // Display the list the console:*
             }
             }
 
-            function serverConnected() {
-              print('connected to server.');
+            function serverConnected() {    //*
+              print('connected to server.');    //*
             }
             
-            function portOpen() {
-              print('the serial port opened.')
+            function portOpen() {*
+              print('the serial port opened.')    //*
             }
             
-            function serialError(err) {
-              print('Something went wrong with the serial port. ' + err);
+            function serialError(err) {*
+              print('Something went wrong with the serial port. ' + err);   //*
             }
             
-            function portClose() {
-              print('The serial port closed.');
+            function portClose() { //*
+              print('The serial port closed.'); //*
             }
 
-            function serialEvent() {
-              if (serial.available()) {
-                var datastring = serial.readLine(); // readin some serial
-                var newarray; 
-                try {
-                  newarray = JSON.parse(datastring); // can we parse the serial
-                  if (typeof newarray == 'object') {
-                    dataarray = newarray;
+            function serialEvent() {  //*
+              if (serial.available()) { //*
+                var datastring = serial.readLine(); // readin some serial*
+                var newarray; //*
+                try {  //*
+                  newarray = JSON.parse(datastring); // can we parse the serial*
+                  if (typeof newarray == 'object') { //*
+                    dataarray = newarray;     //*
                   }
-                  console.log("got back " + datastring);
-                  } catch(err) {
-                  // got something that's not a json
+                  console.log("got back " + datastring);  //*
+                  } catch(err) {  //*
+                  // got something that's not a json  //*
                 }
               } 
             }
 
             function draw() {
-              clear();
-              map(dataarray[0],0,1022,0,windowHeight);
-              map(dataarray[1],0,1022,0,windowWidth);
-              constrain(dataarray[0],0,windowHeight);
-              constrain(dataarray[1],0,windowWidth);
-              circle(dataarray[0],dataarray[1], 40);
+              
+              clear();                  //Clears the previous circle
+              let X = dataarray[0];     //Creates variable for the x posistion from the joysitck input
+              let Y = dataarray[1];     //Creates variable for the y posistion from the joysitck input
+              let calX = map(X,0,1023,0,windowWidth); //Maps the values from the 0 to max to the x boundires of the screen
+              let calY = map(Y,0,1023,0,windowHeight); //Maps the values from the 0 to max to the y boundires of the screen
+              calX = constrain(calX,0,windowWidth);    //Constrains the x values to the width of the screen
+              calY = constrain(calY,0,windowHeight); //Constrains the y values to the width of the screen
+              circle(calX,calY, 40);  //Draw the circle based on the x and y vaues mapped and constrained form the joystick
             }
 
-            function keyPressed() {
-              console.log("writing key");
-              serial.write(key);
+            function mousePressed() { //Detects if the mouse is  pressed
+              serial.write(255);      //Sends the value of 255 to arduino
             }
+
+            function mouseReleased() {  //Detects if the mouse is not pressed
+              serial.write(0);        //Sends the value of 0 to the arduino
+            }
+
         
-        Some code was adapted from the <a href="https://docs.google.com/presentation/d/1aAMFgXm5N2HypPeqKlxVltI8ZedkZ-D7iix1DFV73z0/edit#slide=id.g4fcc6364fc_0_294">Capacitive touch example</a>(*) indicated by asterisk in the comments 
-            </code> </pre> 
-            <span class="caption">Code that utilizes capacitive touch to turn on an LED strip with the use of a transistor. 
-              It sets the use of pin 2 as a sensor pin for capacitive touch and then Pin 6 as an output and starts the serial 
-              monitor. Then it starts a timer to track time for debugging, then tota1 is used to store the reading from the 
-              capacitive touch then we constrain the readings and then map them from 0 to 255 for an appropriate range for 
-              analogWrite(). for debugging the totals are printed and then written to pin 6 for the transistor to limit the 
-              power that goes through the transistor and power the LED strip.
+        Some code was adapted from the <a href="https://docs.google.com/presentation/d/1X5DYgrhJWiKvwXn2mSWwS4jWcq0iZ6bq1suq-6RivDE/edit">In class example</a>(*) indicated by asterisk in the comments 
+            
+        </code> </pre> 
+            <span class="caption">That takes in values from an arduino joystick and then is mapped and constrained to the size of the screen before drawing it so that 
+              the circle moves when the joystick moves. The code goes from comput to arduino when the mouse button is clicked writing to it the light level where the arduino set
+              the LED to a light level of 0 when not clicked or 255 when clicked. 
             </span>
           <br> 
           <h2>🧮 Calculations and Schematic 📄</h2>
           For calculations for the LEDs, I utilized Ohm's law (V=IR) to calculate the minimum amount of resistance to use. The computer outputs 5V (V=5)
            and a red LED causes a drop of 1.8V. Then from the Datasheet document, the max amount of current for the LEDs should be .03MA so I used .02A 
-           to be safe. Now that I have the variables for solving for the resistance needed I solved it and found that R = 160Ω for red blue was R = 85Ω. 
-           In my circuit, I decided to use 330Ω as it was higher than the minimum about of resistance needed to power the circuit. Then for what I used for
-           analog write was light levels based off of what key were detected, so with the ascii for space (32) is set the led to a light level of 150, and
-           I had it read for 0 (ascii 48) and set the light level to 0. Finally had it set the light level to 50 for any other key that was read.
-          <br>
+           to be safe. Now that I have the variables for solving for the resistance needed I solved it and found that R = 160Ω for a red LED. 
+           In my circuit, I decided to use 330Ω as it was higher than the minimum about of resistance needed to power the circuit. 
+           Then for what I used for analog write was the values 0 and 255 when the mouse is not pressed and pressed respectivly this was tu turn the LED on and off. For drawing the circles
+           posistion from the joystick i get a value between 0 and 1023 for x and y values. I map that to the screen size and then constrained it so that it would 
+           move around the screen in a related manner.
               <img class="picture"
               src="/physical/images/A6cal.png" /> 
               <span class="caption">Calculation using Ohm's Law to find Resistance for the red LED.
