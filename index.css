@@ -112,7 +112,7 @@ width: 300px;
 nav {
   display: flex;
   justify-content: space-around;
-  font-family: "Bungee", cursive;
+  font-family: "Bungee";
   background-color: rgb(19, 93, 39);
   color: white;
   padding: 0.5rem;
