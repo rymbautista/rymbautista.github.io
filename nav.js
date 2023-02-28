@@ -2,6 +2,7 @@ import { html, render } from "https://unpkg.com/lit-html?module";
 
 let navPages = [
   { name: "Home", link: "/" },
+  { name: "About Me!", link: "/bio/bio.html" },
   { name: "Cheatsheet", link: "/cheatsheet/cheat.html" },
   { name: "Gallery", link: "/gallery/gallery.html" },
   { name: "MP0", link: "/MP0_Writeup/writeup.html" },
