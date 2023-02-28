@@ -104,3 +104,126 @@ right: 0px;
 bottom: 0px;
 width: 300px;
 }
+
+body {
+  background-color: rgb(45, 136, 56);
+  font-family: Arial, Helvetica, sans-serif;
+  color: black;
+  margin-top: 0;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+h2 {
+  font-family: Lora;
+  padding-left: 2%;
+}
+
+h3 {
+  font-family: Lora;
+  padding-left: 2%;
+  font-size: 20px;
+}
+
+.fade-in-text {
+  font-family: Lora;
+  font-size: 50px;
+  padding-top: 15px;
+  text-align: center;
+  }
+  
+  .fade-in-text:hover {
+    animation: fadeIn 5s;
+    -webkit-animation: fadeIn 5s;
+    -moz-animation: fadeIn 5s;
+    -o-animation: fadeIn 5s;
+    -ms-animation: fadeIn 5s;
+    }
+    
+    @keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+    }
+    
+    @-moz-keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+    }
+    
+    @-webkit-keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+    }
+    
+    @-o-keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+    }
+    
+    @-ms-keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+    }
+    
+    nav {
+      display: flex;
+      justify-content: space-around;
+      font-family: "Bungee", cursive;
+      background-color: rgb(19, 93, 39);
+      color: white;
+      padding: 0.5rem;
+    }
+    
+    @media (min-width: 2000px) {
+      nav {
+        /* writing-mode: vertical-lr; */
+        height: 100%;
+        width: 100%;
+        align-items: center;
+      }
+    
+      #page-content {
+        padding: 4rem;
+      }
+    
+      #nav-container {
+        width: 100%;
+      }
+    }
+    
+    @media (max-height: 100px) {
+      nav {
+        height: 100%;
+      }
+    
+      /* #page-content {
+        padding: 4rem 1rem;
+      } */
+    
+      #nav-container {
+        height: 100%;
+      }
+    }
+    
+    /* Styling navbar links */
+    
+    /* Normal link, not visited */
+    a:link {
+      color: white;
+      text-decoration: none;
+    }
+    
+    /* Visited link */
+    a:visited {
+      color: white;
+    }
+    
+    /* Hovering over the link */
+    a:hover {
+      color: #ffb7db;
+    }
+    
+    /* Selected link */
+    a:active {
+      color: #454598;
+    }

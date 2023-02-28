@@ -27,6 +27,10 @@ body {
   color: white;
   display: flex;
   text-align: center;
+  margin-top: 0;
+  margin-left: 0;
+  margin-right: 0;
+
 }
 
 .fade-in-text {
@@ -103,4 +107,67 @@ position: absolute;
 right: 0px;
 bottom: 0px;
 width: 300px;
+}
+
+nav {
+  display: flex;
+  justify-content: space-around;
+  font-family: "Bungee", cursive;
+  background-color: rgb(19, 93, 39);
+  color: white;
+  padding: 0.5rem;
+}
+
+@media (min-width: 600px) {
+  nav {
+    /* writing-mode: vertical-lr; */
+    height: 100%;
+    width: 100%;
+    align-items: center;
+  }
+
+  #page-content {
+    padding: 4rem;
+  }
+
+  #nav-container {
+    width: 100%;
+  }
+}
+
+@media (max-height: 600px) {
+  nav {
+    height: 100%;
+  }
+
+  /* #page-content {
+    padding: 4rem 1rem;
+  } */
+
+  #nav-container {
+    height: 100%;
+  }
+}
+
+/* Styling navbar links */
+
+/* Normal link, not visited */
+a:link {
+  color: white;
+  text-decoration: none;
+}
+
+/* Visited link */
+a:visited {
+  color: white;
+}
+
+/* Hovering over the link */
+a:hover {
+  color: #ffb7db;
+}
+
+/* Selected link */
+a:active {
+  color: #454598;
 }
