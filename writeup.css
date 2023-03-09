@@ -7,6 +7,7 @@
   padding-bottom: 2%;
   padding-left: 25%;
   padding-right: 25%;
+  font-size: large;
 }
 
 .writeup-container {
@@ -21,11 +22,13 @@
   padding-bottom: 1%;
   padding-left: 2%;
   padding-right: 2%;
+  font-size: large;
 }
 
 body {
   background-color: rgb(45, 136, 56);
   font-family: Lora;
+  font-size: 1rem;
   color: black;
   margin-top: 0;
   margin-left: 0;
@@ -34,7 +37,7 @@ body {
 
 .fade-in-text {
   font-family: Lora;
-  font-size: 50px;
+  font-size: 4rem;
   padding-top: 15px;
   text-align: center;
   }
@@ -116,19 +119,19 @@ body {
     
     /* Normal link, not visited */
     a:link {
-      color: white;
+      color: rgb(33, 102, 40);
       text-decoration: none;
     }
     
     /* Visited link */
     a:visited {
-      color: white;
+      color: rgb(87, 185, 120);
     }
     
     /* Hovering over the link */
     a:hover {
-      color: #ffb7db;
-    }
+      color: #83e183;
+    }    
     
     /* Selected link */
     a:active {

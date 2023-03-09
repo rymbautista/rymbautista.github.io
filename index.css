@@ -153,18 +153,18 @@ nav {
 
 /* Normal link, not visited */
 a:link {
-  color: white;
+  color: rgb(33, 102, 40);
   text-decoration: none;
 }
 
 /* Visited link */
 a:visited {
-  color: white;
+  color: rgb(87, 185, 120);
 }
 
 /* Hovering over the link */
 a:hover {
-  color: #ffb7db;
+  color: #83e183;
 }
 
 /* Selected link */

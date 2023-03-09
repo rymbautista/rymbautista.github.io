@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="../writeup.css" />
+    <title>Final Project Prototype</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2280%22>🐸</text></svg>">
+  </head>
+  <body>
+    <div id="nav-container"></div>
+    <h1 class="fade-in-text">Final Project Prototype</h1>
+    <div class="writeup-container">
+      <div>
+        <p class="intro-paragraph">
+          <h2>Project Description</h2>
+          <b>
+            For my prototype, I have made a frog pet simulator where you drag and drop items to help replenish the decreasing happiness bar while balancing the hunger bar
+            status.
+
+          <h3>Play my game <a href="https://rymbautista.github.io/438FinalProto/">here!</a></h3> 
+          <br>
+          <img class="picture"
+            src="/images/FinalP2.JPG" />  
+          <img class="picture"
+          src="/images/FinalPdemo.gif" />  
+          <br>
+          <h2>Development Process</h2> 
+          <h3>Mapping</h3> 
+          The first thing I did was map out the placement of the assets that I will be implementing. I used basic p5 shapes to make the background. After that I made 
+          the basic static sprites and ended up with the basic setting of my game.
+          <img class="picture"
+            src="/images/FInalP1.JPG" />  
+          <h3>Sprite interactions</h3> 
+          The first thing that I did was make it so that the status bar's length was dependent on a variable and then made it so that the hunger bar would decrease 
+          over time as well. Next, I used p5.play functions to get the frog sprite to move in a set pattern. After that, I began working on how to get the sprites to 
+          interact with the fly sprite that followed the mouse. first I tested out if overlapping would be able to change the bar values. I ran into issues but with the help
+          of Hannah, I was able to get the fly to interact with the fly to change the values.
+          <h3>Dragging Objects</h3>
+          The Final thing I implemented for this prototype is having the objects follow the mouse when the fly sprite overlaps them. I was able to get that to occur and then
+          have it so that the object overlaps the frog it would change the bar value. I even added a trash sprite that will get rid of the current object the user is 
+          currently holding. 
+          <h2>Issue Deep-Dive</h2> 
+          <h3>Sprits and overlap</h3> 
+          The biggest issue that I incountered was being able to have the sprites interact with each other when they overlapped. With the help of Hannah we found that
+          setting the inital fly location and then using mouseX and mousY caused the fly to teleport so using movetowards is much more effective and allowed for the 
+          the sprites to be able to ineract when they overlapped
+        <h2>Project Scope</h2>
+            The scope of my project has not changed since the beginning of my proposal. The only feature that I changed was adding the trash can.
+          <h2>Time management</h2>  
+          I am right on track to what my inital plan was, I have all the staging done and already starting to implament the real images. The roadblock that I encountered
+          was just the sprite overlapping interactions, but that was anticipated and resolved. 
+         <br> 
+          <h2>Implementation plan</h2> 
+          My implementation plan for my final project has not changed as I am right on track.
+          <h2>Kudos</h2> 
+          I would like to thank Andy Shaw for helping me debug some of my issues regarding pictures, and overlapping.
+          </b>
+        </p>
+      </div>
+    </div>
+    <script src="/nav.js" type="module" defer></script>
+  </body>
+</html>
