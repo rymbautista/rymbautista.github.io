@@ -107,3 +107,12 @@ display: block;
   color: black;
   text-align: center;
 }
+
+div, iframe {
+  margin: 0 auto;
+}
+
+iframe {
+  display: block;
+  border-style:none;
+}

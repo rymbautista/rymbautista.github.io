@@ -2,118 +2,187 @@
 <html>
   <head>
     <link rel="stylesheet" href="./FP.css" />
-    <title>Final Project</title>
+    <title>FP: Hello Frog!</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2280%22>🐸</text></svg>">
   </head>
   <body>
-    <h1 class="fade-in-text">Final Project</h1>
+    <h1 class="fade-in-text">Hello Frog!</h1>
     <div class="writeup-container">
       <div>
         <p class="intro-paragraph">
           <h2>Overview</h2>
           <b> 
             Hello Frog! is a standee that waves back at you. The purpose of Hello Frog! is to improve the experience of visiting my table while I
-            am vending at vendor fairs! 
+            am vending at vendor fairs!
+          <div><img class="picture"
+            src="/physical/images/HFp.png" /> 
+          <span class="caption">Image of "Hello Frog!"</span> 
+          <div><img class="picture"
+            src="/physical/images/Hfgif.gif" /> 
+          <span class="caption">Gif of "Hello Frog!"</span> 
         <div><img class="picture"
-            src="/physical/images/A4P1.png" /> 
+            src="/physical/images/HFp1.png" /> 
         <div><img class="picture"
-          src="/physical/images/A4P2.png" /> 
-        <span class="caption">Images of the "Libraries!" Circut</span> 
-        <img class="picture"
-        src="/physical/images/A4gif.gif" />
-        <span class="caption">Gif of a remote that is received by an inferred sensor causes the 7-segment display to change and 
-          the serial monitor to display certain messages of my choosing in addition to displaying the values to a button that 
-          haven't been set yet for use.</span>  
-        </div>      
+          src="/physical/images/HFp2.png" /> 
+        <div><img class="picture"
+          src="/physical/images/HFp3.png" /> 
+        <span class="caption">Images of the "Hello Frog" Circut form multiple views</span> 
+        <iframe width="420" height="315"
+        src="https://youtu.be/qYHQ0jBh_xM">
+        </iframe>
+        <span class="caption">Demo video of Hello Frog!</span>  
+        </div> 
+        <h2>⚙ Technical Implamentation</h2>
+          Hello Frog! Utilizes a stepper motor, stepper motor driver, potentiometer, 2 white LED bulbs, 330-ohm resistors, wires, the breadboard
+          , and an Arduino powered by a 9V battery. It is encased in a laser-cut wood shell that hides the circuit and is in the shape of a frog. 
+          On the back is where the stepper motor is implemented and in between the front and back panels is where the arm waves and the lights 
+          are set up. Inside is where the potentiometer is placed so that the user can set it up and turn on the display and convert it back up to
+          show minimal hardware. 
           <br>
           <h2>👨‍💻Firmware</h2> 
           <pre> <code>
-            #include &lt;IRremote.h>            //Brings in the Inferred Remote Libary *    
-            #include &lt;SevenSegmentDisplay.h> //Brings in the 7 segment display Libary **
-            
-            #define IR_RECEIVE_PIN 3  //sets which pin will receive the IR readings *
-            SevenSegmentDisplay screenName(11, 10, 7, 8, 9, 12, 13, 6, false); //sets which pins corresponds to which part of the segment display **
-            
-            //This section create variables of buttons and their readings *
-            #define IR_BUTTON_1 12
-            #define IR_BUTTON_2 24
-            #define IR_BUTTON_3 94
-            #define IR_BUTTON_4 8
-            #define IR_BUTTON_PLAY_PAUSE 64
-            #define IR_BUTTON_POWER 69
-            
+            #define IN1 8 //Sets the IN1 on the steppor motor driver to pin 8(*)
+            #define IN2 9 //Sets the IN2 steppor motor driver to pin 9(*)
+            #define IN3 10 //Sets the IN3 steppor motor driver to pin 10(*)
+            #define IN4 11//Sets the IN4 steppor motor driver to pin 11(*)
+
+            int potPin = A0;   // the analog pin that the potentiometer is attached to
+            int potValue = 0;  // variable to store the value read from the potentiometer
+            int Steps = 0; //Variable for what state the motor is in(*)
+            boolean Direction = true; //Sets the direction variable(*)
+
             void setup() {
-              Serial.begin(9600);               //Sets the data rate in bits per second for serial data transmission
-              IrReceiver.begin(IR_RECEIVE_PIN); //Initiates the IR Receive Pin *
+              Serial.begin(9600);  //Sets the data rate in bits per second for serial data transmission(*)
+              pinMode(IN1, OUTPUT); //Set IN1 pin to OUTPUT(*)
+              pinMode(IN2, OUTPUT); //Set IN2 pin to OUTPUT(*)
+              pinMode(IN3, OUTPUT); //Set IN3 pin to OUTPUT(*)
+              pinMode(IN4, OUTPUT); //Set IN4 pin to OUTPUT(*)
+            }
+
+            void loop() {
+              potValue = analogRead(potPin);  // read the value from the potentiometer
+              potValue = map(potValue,0,1023,920,1496); //Maps the values from the 0 to 1023 to my deisired microsecond delay range
+              potValue = constrain(potValue,920,1496);  //Constrains the readings to the range just in case if goes beyond to original Mapping
+              Serial.println(potValue);       // print the value to the serial monitor for debugging
+              
+              // check motor state(*)
+              if (potValue != 920) { //checks if the lowest value is not being read
+                for(int i=0; i&lt;(1360); i++){  //loop to go through the stages of the motor and have it rotate for one third of the circle
+                  stepper(1);                 //Calls stepper function
+                  delayMicroseconds(potValue); //Speed the stepper will move
+                }
+                Direction = !Direction; //Reverses order for the stepper to move in the other direction
+              }
             }
             
-            void loop() {
-              if (IrReceiver.decode()) {              //Checks if anything has been revieved *
-                IrReceiver.resume();                  //Resume checking for reading *
-                int command = IrReceiver.decodedIRData.command; //Get the recently recieved reading from the remote *
-                switch (command) {                    //Checks what number is recieved *
-                  case IR_BUTTON_1: {                 //Checks if buttons 1 = 12  is being pressed *
-                    Serial.println("Slay");           //Prints "Slay"
-                    screenName.displayCharacter('1'); //Sets the seven segment display to display the number 1 **
-                    break;                            //Exits the switch statement  *
-                  }
-                  case IR_BUTTON_2: {
-                    Serial.println("Yasss");
-                    screenName.displayCharacter('2');
+
+            //Goes through the stages to move the stepper motor in one direction.(*)
+            void stepper(int xw) {
+              for (int x = 0; x &lt; xw; x++) {
+                switch (Steps) {
+                  case 0:
+                    digitalWrite(IN1, LOW);
+                    digitalWrite(IN2, LOW);
+                    digitalWrite(IN3, LOW);
+                    digitalWrite(IN4, HIGH);
                     break;
-                  }
-                  case IR_BUTTON_3: {
-                    Serial.println("I &lt;3 HCDE 439");
-                    screenName.displayCharacter('3');
+                  case 1:
+                    digitalWrite(IN1, LOW);
+                    digitalWrite(IN2, LOW);
+                    digitalWrite(IN3, HIGH);
+                    digitalWrite(IN4, HIGH);
                     break;
-                  }
-                  case IR_BUTTON_4: {
-                    Serial.println("Can I get a McPick 2?");
-                    screenName.displayCharacter('4');
+                  case 2:
+                    digitalWrite(IN1, LOW);
+                    digitalWrite(IN2, LOW);
+                    digitalWrite(IN3, HIGH);
+                    digitalWrite(IN4, LOW);
                     break;
-                  }
-                  case IR_BUTTON_PLAY_PAUSE: {
-                    Serial.println("Bring the Beet in");
-                    screenName.displayCharacter('B');
+                  case 3:
+                    digitalWrite(IN1, LOW);
+                    digitalWrite(IN2, HIGH);
+                    digitalWrite(IN3, HIGH);
+                    digitalWrite(IN4, LOW);
                     break;
-                  }
-                  case IR_BUTTON_POWER: {
-                    Serial.println("fORGGG");
-                    screenName.displayCharacter('F');
+                  case 4:
+                    digitalWrite(IN1, LOW);
+                    digitalWrite(IN2, HIGH);
+                    digitalWrite(IN3, LOW);
+                    digitalWrite(IN4, LOW);
                     break;
-                  }
-                  default: {                              //If none of the calibrated buttons are pressed go into here *
-                    Serial.println("Who Dis???");         //Print "Who Dis???"
-                    screenName.displayCharacter('S');     //Display on teh seven segments "S" **
-                    Serial.println(IrReceiver.decodedIRData.command); //Display the Reading for future calibrations
-                  }
-                  }
+                  case 5:
+                    digitalWrite(IN1, HIGH);
+                    digitalWrite(IN2, HIGH);
+                    digitalWrite(IN3, LOW);
+                    digitalWrite(IN4, LOW);
+                    break;
+                  case 6:
+                    digitalWrite(IN1, HIGH);
+                    digitalWrite(IN2, LOW);
+                    digitalWrite(IN3, LOW);
+                    digitalWrite(IN4, LOW);
+                    break;
+                  case 7:
+                    digitalWrite(IN1, HIGH);
+                    digitalWrite(IN2, LOW);
+                    digitalWrite(IN3, LOW);
+                    digitalWrite(IN4, HIGH);
+                    break;
+                  default:
+                    digitalWrite(IN1, LOW);
+                    digitalWrite(IN2, LOW);
+                    digitalWrite(IN3, LOW);
+                    digitalWrite(IN4, LOW);
+                    break;
                 }
+                SetDirection();
               }
+            }
+
+            //Dictates when the stepper will switch direction(*)
+            void SetDirection() {
+              if (Direction == 1) {
+                Steps++;
+              }
+              if (Direction == 0) {
+                Steps--;
+              }
+              if (Steps &gt; 7) {
+                Steps = 0;
+              }
+              if (Steps &lt; 0) {
+                Steps = 7;
+              }
+            }
+
         
-        Some code was adapted from the <a href="https://github.com/alikabeel/Letters-and-Numbers-Seven-Segment-Display-Library">Seven Segment Libary Documentation</a>(*) and 
-        the <a href="https://roboticsbackend.com/arduino-ir-remote-controller-tutorial-setup-and-map-buttons/">IR Remote Libary Documentation</a>(**) indicated by asterisk in the comments 
+        Some code was adapted from the <a href="https://www.elegoo.com/products/elegoo-uln2003-5v-stepper-motor-uln2003-driver-board">ELEGOO 5 Sets 28BYJ-48 ULN2003 5V Stepper Motor + ULN2003 Driver Board Page</a>
+        (*) indicated by asterisk in the comments 
 
             </code> </pre>  
-            <span class="caption">Code that utilizes an IR Remote and Seven Segments Display library. It sets the use of pins 13,12,11,10,9.8.7, and 6, 
-              as seven-segment display components and initiates 3 as the IR reading pin. This code then sets variables to readings to calibrate the 
-              buttons to responses. After starting the serial monitor it begins to wait for a response from the IR Remote then when it does it checks
-              if it is one of the calibrated buttons. If it is one of them it displays a response in the serial monitor and one on the seven-segment
-              display. If it isn't one of the calibrates it does the same thing but also displays the reading for future calibrations and responses for the
-              user to use. 
+            <span class="caption">Code that first initializes the pins that will be used for changing the states of the stepper motor with the stepper motor driver with
+              pins 8,9,10, and 11. Then initialize the potentiometer pin and a read value variable. Then a steps variable is made to track what stages the stepper 
+              motor is currently going through. After that, we initialize the stepper motor driver pins to be out puts. Next, we go into the loop value, first taking in the
+              potentiometer reading and then storing it, mapping it, and constraining it. By mapping and constraining it, we can set the range of the values to be within 
+              the microsecond delay we want for setting the speed of the stepper motor. After reading we go into the if statement that reads for if the lowest value 
+              is not being read, acting as an off switch. If it is not the lowest reading value we set it to go through the for loop where it will then cycle through the 
+              different stages for the stepper motor to move. After going through the range for 1/3 third of the circle the motor will switch directions, going through this Loop
+              over and over again for a waving back and forth motion.
             </span>
           <br> 
           <h2>🧮 Calculations and Schematic 📄</h2>
-          For calculations for the red LEDs in the seven-segment display, I utilized Ohm's law (V=IR) to calculate the minimum amount of resistance to use. The computer outputs 5V (V=5)
-           and a red LED causes a drop of 1.8V Then from the Datasheet document, the max amount of current for the LEDs should be .03MA so I used .02A to be safe. Now that I have the variables for solving for the resistance needed I solved it 
-           and found that R = 160Ω for red. In my circuit, I decided to use 330Ω for each segment as it was higher than the minimum about of resistance needed to power the circuit.
+          For calculations for the two white LEDs in this circuit I utilized Ohm's law (V=IR) to calculate the minimum amount of resistance to use. The battery outputs 9V (V=9)
+           and a white LED causes a drop of 3.3V Then from the Datasheet document, the max amount of current for the LEDs should be .03MA so I used .02A to be safe. Now that I have the variables for solving for the resistance needed I solved it 
+           and found that R = 120Ω for each of my two white LEDs. In my circuit, I decided to use 330Ω for each segment as it was higher than the minimum about of resistance needed to power the circuit. Then I used 1360 within my
+           for loop the stepper has 4096 steps (the value for making a full rotation) so I used a value that was approximately one third of that but divisible by 8 as the stepper needs to go through
+           8 different stages to move so this makes it easier. 
           <br>
               <img class="picture"
-              src="/physical/images/A4Cal.png" /> 
-              <span class="caption">Calculation using Ohm's Law to find Resistance for the Red LEDs in the seven-segment display</span> 
+              src="/physical/images/HFCal.png" /> 
+              <span class="caption">Calculation using Ohm's Law to find Resistance for the White LEDs</span> 
               <img class="picture"
-              src="/physical/images/A4Cir.png" /> 
-              <span class="caption">Schematic of the Libraries! Circuit</span> 
+              src="/physical/images/HFCir.png" /> 
+              <span class="caption">Schematic of the Hello Frog! Circuit</span> 
               <a href="/physical\physical.html">
               <span class="caption">Home 🏠</span>  
               </a>        
