@@ -9,7 +9,7 @@ let navPages = [
   { name: "MP1", link: "/MP1_Writeup/writeup.html" },
   { name: "MP2", link: "/MP2_Writeup/writeup.html" },
   { name: "MP3", link: "/MP3_Writeup/writeup.html" },
-  { name: "Froggy Friend!", link: "/FinalProject/writeup.html" },
+  { name: "Froggy Friend!", link: "/FinalProjectP/writeup.html" },
 ];
 
 function makeNav(links) {

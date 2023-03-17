@@ -2,56 +2,63 @@
 <html>
   <head>
     <link rel="stylesheet" href="../writeup.css" />
-    <title>Final Project Proposal</title>
+    <title>Final Project: Forggy Friend</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2280%22>🐸</text></svg>">
   </head>
   <body>
     <div id="nav-container"></div>
-    <h1 class="fade-in-text">Final Project Proposal</h1>
+    <h1 class="fade-in-text">Final Project: Froggy Friend</h1>
     <div class="writeup-container">
       <div>
         <p class="intro-paragraph">
           <h2>Project Description</h2>
           <b>
-            For my final project I want to mash the concept of a pet frog with a game twist utalizing elements from MP3 game
+            Here is the latest version of my final Project "Froggy Friend!" In this version, you control a fly that will aid you in taking care of your 
+            froggy friend. You will balance bringing over items to entertain and feed your pal as their happiness and hunger levels decrease over time. Rename 
+            your friend and listen to music as you now have a new companion with you!
+
+          <h3>Play my game <a href="https://rymbautista.github.io/438Final/">here!</a></h3> 
           <br>
           <img class="picture"
-            src="/images/Prototypeinterface.png" />
+            src="/images/Finalsnip1.JPG" />  
           <img class="picture"
-            src="/images/Final_Interface.png" />    
+          src="/images/FPGif.gif" />  
           <br>
-          <h2>Project Versions</h2> 
-          <h3>Prototype</h3> 
-          The first prototype will be just blocks with only the frog and frog gifs working to see if i can get the drag and drop elements to work 
-          and the bars to decrease over time and the bars to refill.
-          <h3>Check out my prototype <a href="/FinalProjectproto/writeup.html">here!</a></h3> 
-          <h3>Final Version</h3> 
-          The final version will have the frog moving around and all the assets implamented. There will be a picture frame with a random frog from the imgur
-          api displayed too.  
-          <h2>Time Line</h2> 
-          <OL>
-            <LI>Prototype Version (3/7)
-            <UL>
-            <LI>Implament Basic Background and sprites(3/2)
-            <LI>Impalment Interactions (3/3)
-            <LI>Implament Hunger and happyness bars (3/3)
-            </UL>
-            <LI>Final Version (3/17)
-            <UL>
-            <LI>Implament final graphics
-            <LI>Implament moving frog w/ interactions 
-            <LI>Implament imgur api for random frog
-            </UL>
-            </OL>
-          <h2>Unknowns</h2> 
-          What I don't know how to do is utalize firebase that well and accessing the imgur api using fetch, I will go through
-          the in calss examples again to refresh. I don't know how to have the items be click and dragable to the frog. 
-          <br> 
-          <h2>Stretch Goals</h2> 
-            <ul>
-              <li>Have it log the progress you have made with your frog with firebase</li>
-              <li>Have more than the 4 actions</li>
-            </ul>
+          <h2>Development Process</h2> 
+          <h3>Adding Background and Images </h3> 
+          The first thing I did after making my prototype was add in the background images and colors to make the room not blank. After getting in the background I added
+          the custom elements of the door, the shelf, the hunger icon, and the happy icon. The static image was the fly cursor, I was having issues with having the fly being an animation so a static fly
+          image was used. 
+          <img class="picture"
+            src="/images/FinalSnip.JPG" />  
+          <h3>Sprite interactions</h3> 
+          After implementing the images I began adding the other animations to indicate that the frog has received the given item. This process utilized the addani function
+          and called another function that passed in the item type to set what animation to change it to. There is also another if statement in the draw loop that changes the 
+          animation back to the default animation. 
+          <h3>Painting</h3>
+          After implementing the different animations I worked on the painting sprite, which originally was going to use the imagur API but now uses Lorem Picsum to generate
+          a random stock image to serve as the froggy friend's paintings.
+          <h3>Buttons</h3>
+          Next, I added the buttons. The first button that I implemented was for renaming your frog which makes an alert that prompts the user to input a new name. This new name is stored
+          using p5's store item function which stores the name in the browser so that users can return to the pet that they named. Next came the music button, which loads in music when
+          pressed and then stops when pressed again. The last button that I implemented was the help button which gives the user a brief description of how to take care of their froggy friend.  
+          <h3>Status Boxes</h3>
+          The Final thing I implemented was the status boxes to indicate how your froggy friend is feeling when they get to certain hungry or happy levels. This was done using if statements
+          that check what values the happy and hunger variables were at. This also included the background boxes that pop up with the messages which change colors depending on how low that level
+          is. 
+          <h3>Final Touches</h3>
+          Lastly were little touch-ups, such as adding a border around the painting to frame it, and repositioning the items on the shelves to be dependent on the screen width in addition to
+          being more evenly and consistently placed.
+          <h2>Issue Deep-Dive</h2> 
+          <h3>Changed Animations Not Staying</h3> 
+          The biggest issue that I encountered was with changing animations at first I was having problems with the animations staying but it was an issue of calling the
+          default animation in the draw loop instead of the setup draw frog function that I had. The last issue was that the animations weren't going to the right ones at
+          first but it was an issue of not having enough = signs. 
+          <h3>Music Not Playing</h3> 
+          When dealing with music I ran into an issue where the music couldn't auto-play as a feature of my browser, how I made it so that the user has to press the button at
+          least once to be able to listen to music and then press it again to turn it off.
+          <h2>Kudos</h2> 
+          I would like to thank Andy Shaw for helping me debug some of my issues regarding pictures, and overlapping again.
           </b>
         </p>
       </div>
