@@ -34,7 +34,6 @@ body {
   margin-top: 0;
   margin-left: 0;
   margin-right: 0;
-
 }
 
 .fade-in-text {
@@ -120,17 +119,26 @@ body {
     /* Styling navbar links */
     
     /* Normal link, not visited */
-    a:link {
-      color: rgb(33, 102, 40);
-      text-decoration: none;
-    }
-    
-    /* Visited link */
-    a:visited {
-      color: rgb(87, 185, 120);
-    }
-    
-    /* Hovering over the link */
-    a:hover {
-      color: #83e183;
-    }
+a:link {
+  color: #83e183;
+  text-decoration: none;
+}
+
+/* Visited link */
+a:visited {
+  color: #83e183;
+}
+
+/* Hovering over the link */
+a:hover {
+  color: #dcffdc;
+}
+
+/* Selected link */
+a:active {
+  color: #83e183;
+}
+
+a.one:link {color:#376b49;}
+a.one:visited {color:#4c804f;}
+a.one:hover {color:#7bbc7f;}

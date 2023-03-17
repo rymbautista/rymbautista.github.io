@@ -33,6 +33,7 @@ body {
   margin-top: 0;
   margin-left: 0;
   margin-right: 0;
+  padding-bottom: 1rem;
   overflow-x: hidden;
 }
 
@@ -149,21 +150,21 @@ nav {
 
 /* Normal link, not visited */
 a:link {
-  color: rgb(33, 102, 40);
+  color: #83e183;
   text-decoration: none;
 }
 
 /* Visited link */
 a:visited {
-  color: rgb(87, 185, 120);
+  color: #83e183;
 }
 
 /* Hovering over the link */
 a:hover {
-  color: #83e183;
+  color: #dcffdc;
 }
 
 /* Selected link */
 a:active {
-  color: #454598;
+  color: #83e183;
 }
