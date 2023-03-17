@@ -103,68 +103,59 @@
         0% { opacity: 0; }
         100% { opacity: 1; }
         }
-        </code> </pre>
-        <!-- consolse.log("") - Prints out the text in quotes
+
+        consolse.log("") - Prints out the text in quotes
           let for variables that will change
         consts for variabtles that will not change 
         === for telling boolean
         
-        
-        
-        
-        -->
+        Absolute path
+        mp0/
+          index.html
+        index.html
+
+        <!-- <a href="mp0/"> MP0</a> linkes auto to index.html -->
+        <!-- just a slash will choose the root one so index.html -->
+
+        relative path 
+        . is the current directory your in
+        .. is 2 above 
+
+        Template literals
+        Template literals Syntax
+        back ticks
+        multi line back ticks
+        ${} 
+        ${expression} 
+
+        const name = "Ryan"
+        ex `Hi my name is ${name}
+
+        const a = 5;
+        const b = 10;
+        console.log (`Fifteen is ${a + b} and not ${2 * a + b} +.`);
+          Allows numbs not have to be a sting veriable 
+
+        Tagged templates
+
+        Tunerary operator (like a conditional if statment) v sexy
+        ? checks if its true or not
+        consts name = variable > condidional ? "ifsothing1" : "elsething2";
+
+        let age = 100
+        const bill = age < 99 ? "20" : "10";
+        console.log(age > 99 ? bill : "no");
+
+        <!-- HTML Template ex
+        import {html, render } from "lit-html";
+        const helloTemplate = (name_ => html`<div>Hello ${name}!</99>div>`</div>) -->
+
+        render(myTemplate("earth"), document.body);
+        render(myTemplate("mars"), document.body.id);
+        </code> </pre>
         </p>
       </div>
     </div>
     <script src="/nav.js" type="module" defer></script>
   </body>
 </html>
-
-
-<!-- Absolute path
-
-mp0/
-  index.html
-index.html
-
-<a href="mp0/"> MP0</a> linkes auto to index.html
-just a slash will choose the root one so index.html
-
-relative path 
-. is the current directory your in
-.. is 2 above 
-
-Template literals
-Template literals Syntax
-back ticks
-multi line back ticks
-${} 
-${expression} 
-
-const name = "Ryan"
-ex `Hi my name is ${name}
-
-const a = 5;
-const b = 10;
-console.log (`Fifteen is ${a + b} and not ${2 * a + b} +.`);
-  Allows numbs not have to be a sting veriable 
-
-Tagged templates
-
-Tunerary operator (like a conditional if statment) v sexy
-? checks if its true or not
-consts name = variable > condidional ? "ifsothing1" : "elsething2";
-
-let age = 100
-const bill = age < 99 ? "20" : "10";
-console.log(age > 99 ? bill : "no");
-
-10
-
-
-HTML Template ex
-import {html, render } from "lit-html";
-const helloTemplate = (name_ => html`<div>Hello ${name}!</99>div>`</div>)
-
-render(myTemplate("earth"), document.body);
-render(myTemplate("mars"), document.body.id); -->

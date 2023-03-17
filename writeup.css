@@ -11,6 +11,10 @@
   font-size: (1.6*1.96)rem;
 }
 
+p {
+  font-size: 1.5rem;
+}
+
 .writeup-container {
   display: flex;
   border-radius: 10px;

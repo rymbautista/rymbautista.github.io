@@ -9,6 +9,14 @@
   padding-left: 1%;
 }
 
+p {
+  font-size: 1.5rem;
+}
+
+pre {
+  width: 80%;
+}
+
 .bio-container {
   background-color: rgb(234, 245, 235);
   padding-top: 1%;
@@ -126,20 +134,22 @@ body {
     }
   }
   
-  /* Styling navbar links */
-  
-  /* Normal link, not visited */
   a:link {
-    color: rgb(33, 102, 40);
+    color: #83e183;
     text-decoration: none;
   }
   
   /* Visited link */
   a:visited {
-    color: rgb(87, 185, 120);
+    color: #83e183;
   }
   
   /* Hovering over the link */
   a:hover {
+    color: #dcffdc;
+  }
+  
+  /* Selected link */
+  a:active {
     color: #83e183;
   }
